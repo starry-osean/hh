@@ -37,6 +37,7 @@
     </div>
 </template>
 <script lang="ts" setup name="hospital">
+import useDetailStore from '../../store/modules/hospitalDetail';
 //左侧图标
 import {
   Document,
@@ -45,13 +46,19 @@ import {
   Search,
   Setting,HomeFilled
 } from '@element-plus/icons-vue'
+import { onMounted } from 'vue';
 import { useRouter,useRoute } from 'vue-router';
+//获取仓库对象
+let detailStore=useDetailStore()
 //获取路由器
 let $router=useRouter()
 let $route=useRoute()
 const changeActive=(path:string)=>{
     $router.push({path})
 }
+onMounted(()=>{
+    detailStore.getHospital($route.query.hoscode as string);
+})
 </script>
 <style scoped lang="scss">
     .hospital{

@@ -43,7 +43,7 @@ import Search from './search/index.vue'
 import Leve from './level/index.vue'
 import Local from'./local/index.vue'
 import Card from"./card/index.vue"
-import type { Content,HospitalResponData } from '../../api/home/type'
+import type { Content, HospitalResponseData  } from '../../api/home/type'
 import Tip from './tip/index.vue'
 //分页器页码
     let pageNo=ref<number>(1)
@@ -60,7 +60,7 @@ import Tip from './tip/index.vue'
     })
     //获取网络已有的数据
     const getHospitalInfo=async ()=>{
-        let result :HospitalResponData=await reqHospital(pageNo.value,pageSize.value,hostpype.value,districtCode.value)
+        let result : HospitalResponseData =await reqHospital(pageNo.value,pageSize.value,hostpype.value,districtCode.value)
         if (result.code==200){
             hasHospitalArr.value=result.data.content
            total.value=result.data.totalElements
