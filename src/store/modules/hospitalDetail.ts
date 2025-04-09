@@ -5,12 +5,11 @@ import type {HosPitalDetailData} from '../../api/hospital/type';
 import type {HosPitalDetail} from '../../api/hospital/type'
 //pinia仓库写法：组合式API、选择式API写法
 import type{DetailState} from './interface'
-import { reqHospitalInfo } from "../../api/home";
 const useDetailStore =defineStore('Detail',{
     state:():DetailState =>{
         return {
             //医院详情的数据
-            hospitalInfo:({} as HosPitalDetailData),
+            hospitalInfo:({} as HosPitalDetail),
             
         }
     },
