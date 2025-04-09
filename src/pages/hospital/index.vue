@@ -37,28 +37,40 @@
     </div>
 </template>
 <script lang="ts" setup name="hospital">
-import useDetailStore from '../../store/modules/hospitalDetail';
-//左侧图标
-import {
-  Document,
-  Menu as IconMenu,
-  InfoFilled,
-  Search,
-  Setting,HomeFilled
-} from '@element-plus/icons-vue'
+//引入生命周期函数
 import { onMounted } from 'vue';
-import { useRouter,useRoute } from 'vue-router';
+//引入仓库
+import useDetailStore from '../../store/modules/hospitalDetail'
 //获取仓库对象
-let detailStore=useDetailStore()
+let detailStore = useDetailStore();
+//左侧菜单需要用到的图标
+import {
+    Document,
+    Menu as IconMenu,
+    Setting,
+    InfoFilled,
+    Search,
+    HomeFilled
+} from '@element-plus/icons-vue';
+
+//引入路由器
+import { useRouter, useRoute } from 'vue-router';
 //获取路由器
-let $router=useRouter()
-let $route=useRoute()
-const changeActive=(path:string)=>{
-    $router.push({path})
+let $router = useRouter();
+//获取当前路由的信息
+let $route = useRoute();
+
+//左侧菜单点击事件回调
+const changeActive = (path:string) => {
+    //跳转到对应的二级路由
+    $router.push({path,query:{hoscode:$route.query.hoscode}});
 }
-onMounted(()=>{
+
+//组件挂载完毕，通知 Pinia 仓库发请求获取医院详情的数据，存储于仓库当中
+onMounted(() => {
+    //获取医院详情的数据
     detailStore.getHospital($route.query.hoscode as string);
-})
+    })
 </script>
 <style scoped lang="scss">
     .hospital{

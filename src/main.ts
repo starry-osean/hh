@@ -26,6 +26,6 @@ app.use(ElementPlus,{
     locale: zhCn,
 })
 //安装pinia仓库
-app.use(pinia)
+app.use(pinia);
 //挂载
 app.mount('#app')

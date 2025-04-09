@@ -9,18 +9,22 @@ const useDetailStore =defineStore('Detail',{
     state:():DetailState =>{
         return {
             //医院详情的数据
-            hospitalInfo:({} as HosPitalDetail),
+            hospitalInfo:({} as HosPitalDetailData),
             
         }
     },
     actions:{
         //获取医院详情方法
-        async  getHospital(hoscode:string){
-            let result:HosPitalDetail =await reqHospitalDetail(hoscode)
-            console.log(result);
-            if(result.code == 200) {
-                //医院详情的数据
+        async getHospital(hoscode: string) {
+            try {
+              const result: HosPitalDetail = await reqHospitalDetail(hoscode);
+              if (result.code === 200) {
                 this.hospitalInfo = result.data;
+              } else {
+                console.error('获取医院详情失败:', result.message);
+              }
+            } catch (error) {
+              console.error('获取医院详情失败:', error);
             }
             
         }
