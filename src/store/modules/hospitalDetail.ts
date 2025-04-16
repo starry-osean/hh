@@ -17,13 +17,17 @@ const useDetailStore =defineStore('Detail',{
     actions:{
         //获取医院详情方法
         async getHospital(hoscode: string) {
-            let result:HosPitalDetail = await reqHospitalDetail(hoscode);
-            console.log(result);
-            if(result.code == 200) {
-                //医院详情的数据
-                this.hospitalInfo = result.data;
-            }
-          },
+            try {
+                const result: HosPitalDetail = await reqHospitalDetail(hoscode);
+                if (result.code === 200) {
+                  this.hospitalInfo = result.data;
+                } else {
+                  console.error('获取医院详情失败:', result.message);
+                }
+              } catch (error) {
+                console.error('获取医院详情失败:', error);
+              }
+            },
           //获取某一个医院科室的数据
         async getDepartment(hoscode:string) {
               let result:DeparmentResponseData = await reqHospitalDepartment(hoscode);
