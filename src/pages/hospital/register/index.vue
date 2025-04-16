@@ -12,7 +12,7 @@
                 <img :src="`data:image/isJsxOpeningElement;base64`+hospitalStore.hospitalInfo.hospital?.logoData" alt="">
             </div>
             <div class="right">
-                <div>挂号规则</div>
+                <div class="theme">挂号规则</div>
                 <div class="time">
                     放号时间：{{ hospitalStore.hospitalInfo.bookingRule?.releaseTime }}，挂停时间：{{  hospitalStore.hospitalInfo.bookingRule?.stopTime }}
                 </div>
@@ -29,6 +29,18 @@
                 <div class="ruleInfo" v-for="(item,index) in hospitalStore.hospitalInfo.bookingRule?.rule" :key="index">
                     {{ item }}
                 </div>
+            </div>
+        </div>
+        <div class="department">
+            <div class="leftNav">
+                <ul>
+                    <li v-for="department in hospitalStore.deparmentArr" :key="department.depcode">
+                        {{ department.depname }}
+                    </li>
+                </ul>
+            </div>
+            <div class="departmentInfo">
+                456
             </div>
         </div>
     </div>
@@ -48,16 +60,21 @@ console.log(hospitalStore);
         margin-top: 20px;
         .level{
             display: flex;
-            margin-left: 10px;
+            margin-left: 15px;
             height: 40px;
             text-align: center;
-            line-height: 40px;
+            line-height: 15px;
+            span{
+                margin-left: 10px;
+            }
         }
     }
     .content{
         display: flex;
+        left: 0;
         .left{
             width: 80px;
+            height: 80px;
             img{
                 width: 80px;
                 height: 80px;
@@ -67,13 +84,45 @@ console.log(hospitalStore);
             flex: 1;
             margin-top: 10px;
             font-size: 12px;
+            .theme{
+                width: 60px;
+            }
+            .time{
+                width: 200px;
+            }
+            .address{
+                width: 210px;
+            }
+            .route{
+                width: 1200px;
+            }
+            .relesetime{
+                width: 200px;
+            }
             .time,.address,.route,.relesetime{
                 margin-top: 10px;
                 color: #7f7f7f;
             }
             .rule{
                 margin: 10px;
+                width: 80px;
             }
+            .ruleInfo{
+                width: 500px;
+            }
+        }
+    }
+    .department{
+        width: 100%;
+        height: 500px;
+        display: flex;
+        margin-top: 20px;
+        .leftNav{
+            width: 80px;
+        }
+        .departmentInfo{
+            flex: 1;
+            margin-left: 20px;
         }
     }
 

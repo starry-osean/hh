@@ -4,7 +4,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 const request=axios.create({
-    baseURL:'api',
+    baseURL:'/api',//不能少斜杠
     timeout:5000
 })
 request.interceptors.request.use((config)=>{

@@ -70,6 +70,7 @@ const changeActive = (path:string) => {
 onMounted(() => {
     //获取医院详情的数据
     detailStore.getHospital($route.query.hoscode as string);
+    detailStore.getDepartment($route.query.hoscode as string);
     })
 </script>
 <style scoped lang="scss">
