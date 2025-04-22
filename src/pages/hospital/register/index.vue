@@ -9,7 +9,7 @@
         </div>
         <div class="content">
             <div class="left">
-                <img :src="`data:image/isJsxOpeningElement;base64`+hospitailStore.hospitalInfo.hospital?.logoData" alt="">
+                <img :src="`data:image/isJsxOpeningElement;base64,`+hospitailStore.hospitalInfo.hospital?.logoData">
             </div>
             <div class="right">
                 <div class="theme">挂号规则</div>
@@ -50,8 +50,8 @@
                     <h1 class="cur">{{ deparment.depname }}</h1>
                     <!-- 每一个大科室下的小科室 -->
                     <ul>
-                        <li @click="showLogin(item)" v-for="(item) in deparment.children"
-                            :key="item.depcode" class="xiao">
+                        <li  v-for="(item) in deparment.children"
+                            :key="item.depcode"  @click="showLogin">
                             {{ item.depname }}
                         </li>
                     </ul>
@@ -77,6 +77,7 @@ const changeIndex = (index:number) => {
     currentIndex.value = index;
     //点击导航获取右侧科室（大的科室H1标题）
     let allH1 = document.querySelectorAll('.cur');
+    
     //滚动到对应科室的位置
     allH1[currentIndex.value].scrollIntoView({
         behavior:'smooth',//过渡动画效果
@@ -156,13 +157,12 @@ const showLogin = (item:any) => {
         }
     }
     .department{
-        width: 50%;
+        width: 80%;
         height: 500px;
         display: flex;
         margin-top: 20px;
         .leftNav{
-            width: 80px;
-            width: 100%;
+            width: 200px;
             background-color: rgb(248, 248, 248);
             display: flex;
             flex-direction: column;
@@ -193,10 +193,11 @@ const showLogin = (item:any) => {
                     display: flex;
                     flex-wrap: wrap;
 
-                    .xiao{
+                    li{
                         color: #7f7f7f;
                         width: 33%;
                         line-height: 30px;
+                        cursor: pointer;
                     }
                 }
             }

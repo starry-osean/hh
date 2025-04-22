@@ -3,6 +3,7 @@
         <!--顶部全局组件-->
        <HospitalTop/>
        <HospitalBottom/>
+       <Login/>
        <!--展示路由组件区域-->
        <div class="content">
             <router-view></router-view>

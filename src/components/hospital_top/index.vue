@@ -7,17 +7,23 @@
             </div>
             <div class="right">
                     <p class="help">帮助中心</p>
-                    <p class="login">登录/注册</p>
+                    <p class="login" @click="login">登录/注册 </p>
             </div>
         </div>
     </div>
 </template>
 <script lang="ts" setup name="index">
 import { useRouter } from 'vue-router';
-
+//获取 user 仓库的数据（visiable）数据可以控制 login 组件的对话框的显示与隐藏
+import useUserStore from "../../store/modules/user"
+let userStore=useUserStore();
 let $router=useRouter
 const goHome=()=>{
     $router.push({path:'/home'})
+}
+//弹出对话框
+const login=()=>{
+    userStore.visible=true
 }
 </script>
 <style scoped lang="scss">
@@ -58,6 +64,9 @@ const goHome=()=>{
                         color: darkgray;
                         .help{
                             margin-right: 10px;
+                        }
+                        .login{
+                            cursor: pointer;
                         }
                     }
             }

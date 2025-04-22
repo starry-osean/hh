@@ -56,3 +56,8 @@ export type DeparmentArr = Deparment[];
 export interface DeparmentResponseData  extends ResponseData {
   data: DeparmentArr
 }
+//用户登录接口需要携带的参数
+export interface LoginData {
+  phone: string,
+  code: string
+}

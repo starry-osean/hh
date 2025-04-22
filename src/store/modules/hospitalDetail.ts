@@ -36,6 +36,7 @@ const useDetailStore =defineStore('Detail',{
               
               if(result.code == 200) {
                   this.deparmentArr=result.data;
+        
               }
           }
       },

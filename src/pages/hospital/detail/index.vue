@@ -9,7 +9,7 @@
     </div>
     <div class="logo">
         <div class="left">
-            <img src="" alt="">
+            <img :src="`data:image/isJsxOpeningElement;base64,`+hospitalStore.hospitalInfo.hospital?.logoData">
         </div>
         <div class="right">
             <div class="address">

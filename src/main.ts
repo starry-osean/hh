@@ -6,6 +6,7 @@ import App from './App.vue'
 //引入全局组件
 import HospitalTop from './components/hospital_top/index.vue'
 import HospitalBottom from './components/hospitai_bottom/index.vue'
+import Login from './components/login/index.vue'
 //引入router核心插件并安装
 import router from './router'
 //引入element-plus插件
@@ -19,6 +20,7 @@ import pinia from './store'
 const app=createApp(App)
 app.component('HospitalTop',HospitalTop)
 app.component('HospitalBottom',HospitalBottom)
+app.component('Login',Login)
 //安装router
 app.use(router)
 //安装element-plus插件
