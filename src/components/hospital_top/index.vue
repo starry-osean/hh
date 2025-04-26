@@ -7,12 +7,31 @@
             </div>
             <div class="right">
                     <p class="help">帮助中心</p>
-                    <p class="login" @click="login">登录/注册 </p>
+                    <p class="login" @click="login" v-if="!userStore.userInfo.name">登录/注册 </p>
+                    <p v-else>
+                        <el-dropdown>
+                            <span class="el-dropdown-link">
+                           {{ userStore.userInfo.name }}
+                            <el-icon class="el-icon--right">
+                                <arrow-down />
+                            </el-icon>
+                            </span>
+                            <template #dropdown>
+                            <el-dropdown-menu>
+                                <el-dropdown-item>实名认证</el-dropdown-item>
+                                <el-dropdown-item>挂号订单</el-dropdown-item>
+                                <el-dropdown-item>就诊人管理</el-dropdown-item>
+                                <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+                        </el-dropdown-menu>
+                        </template>
+                        </el-dropdown>
+                    </p>
             </div>
         </div>
     </div>
 </template>
 <script lang="ts" setup name="index">
+import { ArrowDown } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router';
 //获取 user 仓库的数据（visiable）数据可以控制 login 组件的对话框的显示与隐藏
 import useUserStore from "../../store/modules/user"
@@ -24,6 +43,13 @@ const goHome=()=>{
 //弹出对话框
 const login=()=>{
     userStore.visible=true
+}
+//退出登录按钮的回调
+const logout=()=>{
+    //通知 pinia 仓库清除用户相关信息
+    userStore.logout();
+    //编程式导航路由跳转到首页
+    $router.push({path:'/home'});
 }
 </script>
 <style scoped lang="scss">

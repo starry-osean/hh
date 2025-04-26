@@ -1,12 +1,20 @@
 //定义用户相关的仓库
 import {defineStore} from "pinia"
-import {reqCode} from  '../../api/hospital';
+import {reqCode,reqUserLogin} from  '../../api/hospital';
+import type { UserState } from "./interface";
+import type { LoginData, UserLoginResponseData,UserInfo} from "../../api/hospital/type";
+import { GET_TOKEN,SET_TOKEN,REMOVE_TOKEN } from "../../utils/user";
 //登录请求类型
 const useUserStore  =defineStore('User',{
-    state:()=>{
+    state: (): UserState => {
         return {
-            visible:false,//用于控制登录组件的dialog显示与隐藏
-            code:'',//存储验证码
+            //用于控制登录组件 Dialog 的显示与隐藏
+            visible: false,
+            //存储用户的验证码
+            code: '',
+            //存储用户信息
+            //({} as UserInfo)本地存储本地拿或者对象
+            userInfo: JSON.parse(GET_TOKEN() as string)||({}as UserInfo)
         }
     },
     actions:{
@@ -19,13 +27,35 @@ const useUserStore  =defineStore('User',{
             
             if(result.code==200){
                 this.code=result.data;
+                //本地存储持久化用户信息
+                //localStorage.setItem('USERINFO',JSON.stringify(this.userInfo))
+                SET_TOKEN(JSON.stringify(this.userInfo));
                 return 'ok'
             }else{
-                //return Promise.reject(new Error(result.message));
+                return Promise.reject(new Error(result.message));
             }
         
             
         },
+        //手机号登陆
+        async  userLogin(loginData:LoginData){
+           let result=await reqUserLogin(loginData);
+                if(result.code==200){
+                    console.log(result);
+                    
+                    this.userInfo=result.data;
+                }else{
+                    return Promise.reject(new Error (result.message))
+                }
+            
+        },
+        //退出登录方法
+        logout(){
+            //清空仓库的数据
+            this.userInfo={name:'',token:''};
+             //清空本地存储的数据
+            REMOVE_TOKEN();
+        }
     },
     getters:{
         

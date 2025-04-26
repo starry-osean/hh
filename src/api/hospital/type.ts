@@ -61,3 +61,22 @@ export interface LoginData {
   phone: string,
   code: string
 }
+//登录接口返回的用户信息数据的类型
+export interface UserInfo{
+  name:string,
+  token:string
+}
+//登录接口返回数据的 TS 类型
+export interface UserLoginResponseData extends ResponseData{
+  data:UserInfo
+}
+//定义微信扫描登录返回数据的 TS 类型
+export interface WXLogin {
+  "redirectUri": string,
+  "appid": string,
+  "scope": string,
+  "state": string
+}
+export interface WXLoginResponseData extends ResponseData{
+  data:WXLogin
+}
