@@ -24,8 +24,15 @@ export default createRouter({
                 },{
                     path:'register',
                     component:()=>import('../pages/hospital/register/index.vue')
+                },{
+                    path:'wxlogin',
+                    component:()=>import('../pages/wxlogin/index.vue')
                 }
             ]
+        },{
+            path:'/wxlogin',
+            component:()=>import('../pages/wxlogin/index.vue')
+
         },{
             path:'/',
             redirect:'/home'

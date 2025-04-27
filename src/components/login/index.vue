@@ -90,7 +90,7 @@
 </template>
 <script lang="ts" setup>
 //获取 user 仓库的数据（visiable）数据可以控制 login 组件的对话框的显示与隐藏
-import { reactive, ref ,computed} from "vue";
+import { reactive, ref ,computed, watch} from "vue";
 import useUserStore from "../../store/modules/user"
 import { User,Lock, Phone } from '@element-plus/icons-vue'
 //导入倒计时组件
@@ -221,6 +221,11 @@ const closeDialog = () => {
 const handler=()=>{
     scene.value=0;
 }
+watch (()=>scene.value,(val:number)=>{
+    if (val==1){
+        userStore.queryState();
+    }
+})
 </script>
 <script lang="ts">
 export default {

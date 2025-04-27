@@ -4,6 +4,7 @@ import {reqCode,reqUserLogin} from  '../../api/hospital';
 import type { UserState } from "./interface";
 import type { LoginData, UserLoginResponseData,UserInfo} from "../../api/hospital/type";
 import { GET_TOKEN,SET_TOKEN,REMOVE_TOKEN } from "../../utils/user";
+import { timePanelSharedProps } from "element-plus/es/components/time-picker/src/props/shared.mjs";
 //登录请求类型
 const useUserStore  =defineStore('User',{
     state: (): UserState => {
@@ -41,7 +42,6 @@ const useUserStore  =defineStore('User',{
         async  userLogin(loginData:LoginData){
            let result=await reqUserLogin(loginData);
                 if(result.code==200){
-                    console.log(result);
                     
                     this.userInfo=result.data;
                 }else{
@@ -55,6 +55,15 @@ const useUserStore  =defineStore('User',{
             this.userInfo={name:'',token:''};
              //清空本地存储的数据
             REMOVE_TOKEN();
+        },
+        queryState(){
+            let timer=setInterval(()=>{
+                if(GET_TOKEN()){
+                    this.visible=false;
+                    this.userInfo=JSON.parse(GET_TOKEN() as string);
+                    clearInterval(timer);
+                }
+            },1000)
         }
     },
     getters:{

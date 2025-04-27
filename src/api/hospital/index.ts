@@ -27,5 +27,6 @@ export const reqCode  =
 export const reqUserLogin = 
     (data:LoginData) => 
     request.post<any,UserLoginResponseData>(API.USERLOGIN_URL, data);
+  //获取微信扫描登录生成二维码需要的参数接口
 export const reqWxLogin =(wxRedirectUri: string)=>
-  request.get<any,WXLoginResponseData>(API.WXLOGIN_URL+`?wxRedirectUri=${wxRedirectUri}`);
+  request.get<any, WXLoginResponseData>(API.WXLOGIN_URL + `?wxRedirectUri=${wxRedirectUri}`); 

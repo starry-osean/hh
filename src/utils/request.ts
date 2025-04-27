@@ -7,7 +7,8 @@ const request=axios.create({
     baseURL:'/api',//不能少斜杠
     timeout:5000
 })
-request.interceptors.request.use((config)=>{
+request.interceptors.request.use(
+    (config)=>{
     //config:请求拦截器注入的对象（配置对象），配置对象的身上的headers属性
     //可以通过请求头携带公共参数-token
     return config

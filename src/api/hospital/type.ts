@@ -77,6 +77,6 @@ export interface WXLogin {
   "scope": string,
   "state": string
 }
-export interface WXLoginResponseData extends ResponseData{
-  data:WXLogin
+export interface WXLoginResponseData extends ResponseData {
+  data: WXLogin
 }
